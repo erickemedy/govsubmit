@@ -1,19 +1,32 @@
 # GovSubmit.com
 
-Independent, ad-free tool that helps citizens easily access and pre-fill official U.S. government complaint and reporting forms.
+Independent, ad-free tool that simplifies access to official U.S. government complaint and reporting forms.
+
+**Not affiliated with any government agency.**
+
+## Purpose
+Help citizens easily report issues to the right official channels:
+- FCC (media/broadcast complaints)
+- FTC (scams, fraud)
+- EPA (environmental)
+- CISA (cyber incidents)
+- Local 311/police
+- And more
+
+No data is stored — users are guided and redirected directly to official government sites.
 
 ## Features
-- Guides users to official forms (FTC, FCC, EPA, CISA, local 311, etc.)
-- Pre-fills basic info where possible
-- No data stored � direct redirect to government sites
-- Not affiliated with any government agency
+- Clean, simple interface
+- Pre-filled guidance where possible
+- Mobile-friendly
+- Zero tracking or cookies
 
-## Privacy
-- No tracking
-- No cookies
-- No data collection
+## Local Preview
+Just open `index.html` in a browser or serve the folder statically.
 
-## Local Development
-- Just open index.html or serve via any static host.
+## License
+MIT License — feel free to fork, contribute, or use for similar civic projects.
 
-Built with ?? for civic engagement.
+Built with ❤️ for civic engagement and government accountability.
+
+Questions? Open an issue or reach out.
