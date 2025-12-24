@@ -1,3 +1,7 @@
+[![Open Source](https://img.shields.io/badge/Open-Source-brightgreen)](https://github.com/erickemedy/govsubmit)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![No Tracking](https://img.shields.io/badge/Privacy-No_Tracking-blue)](https://govsubmit.com)
+
 # GovSubmit.com
 
 Independent, ad-free tool that simplifies access to official U.S. government complaint and reporting forms.
