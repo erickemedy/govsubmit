@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GovSubmit.com Live Stats Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            background: #0f172a; 
+            color: #e0e0e0; 
+            margin: 0; 
+            padding: 40px 20px; 
+        }
+        .container { max-width: 1200px; margin: auto; }
+        header { text-align: center; margin-bottom: 50px; }
+        header h1 { color: #72a4f2; font-size: 2.8em; margin: 0; }
+        header p { font-size: 1.2em; color: #94a3b8; margin-top: 10px; }
+        .kpi-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 24px; 
+            margin-bottom: 60px; 
+        }
+        .kpi-card {
+            background: #1e293b; 
+            padding: 32px; 
+            border-radius: 16px; 
+            text-align: center; 
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            border: 1px solid #334155;
+        }
+        .kpi-value { 
+            font-size: 56px; 
+            font-weight: bold; 
+            color: #72a4f2; 
+            margin: 0;
+        }
+        .kpi-label { 
+            font-size: 20px; 
+            color: #94a3b8; 
+            margin-top: 12px; 
+        }
+        .chart-container { 
+            background: #1e293b; 
+            padding: 32px; 
+            border-radius: 16px; 
+            margin-bottom: 40px; 
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            border: 1px solid #334155;
+        }
+        .chart-container h2 { text-align: center; margin-bottom: 30px; color: #72a4f2; }
+        footer { text-align: center; padding: 30px; color: #64748b; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>GovSubmit.com</h1>
+            <p>Live Public Stats Dashboard - Launched December 21, 2025</p>
+            <p>Tracking real user activity - numbers update when you refresh</p>
+        </header>
+
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-value" id="total-visits">0</div>
+                <div class="kpi-label">Total Visits (All Time)</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-value" id="fcc-submissions">0</div>
+                <div class="kpi-label">FCC Complaints Prepped</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-value" id="cisa-reports">0</div>
+                <div class="kpi-label">CISA Reports Guided</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-value" id="donations">0</div>
+                <div class="kpi-label">Donations Received (Manual)</div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <h2>Wizard Usage (Times Opened)</h2>
+            <canvas id="usageChart"></canvas>
+        </div>
+
+        <footer>
+            Data powered by client-side tracking • Refresh to update • GovSubmit.com — making civic reporting easy
+        </footer>
+    </div>
+
+    <script>
+        // Load stats from LocalStorage (same key used on main site)
+        let stats = JSON.parse(localStorage.getItem('govsubmit_stats') || '{"visits":0,"unique_days":[],"wizards":{},"submissions":{}}');
+
+        // Update KPI values
+        document.getElementById('total-visits').textContent = stats.visits.toLocaleString();
+        document.getElementById('fcc-submissions').textContent = (stats.submissions.FCC || 0);
+        document.getElementById('cisa-reports').textContent = (stats.submissions.CISA || 0);
+        document.getElementById('donations').textContent = '0'; // Manual until we add tracking
+
+        // Wizard Usage Bar Chart
+        const wizardData = [
+            stats.wizards.fcc || 0,
+            stats.wizards['311'] || 0,
+            stats.wizards.police || 0,
+            stats.wizards.cisa || 0,
+            stats.wizards.ftc || 0,
+            stats.wizards.epa || 0,
+            stats.wizards.ag || 0,
+            stats.wizards.election || 0,
+            stats.wizards.feedback || 0
+        ];
+
+        new Chart(document.getElementById('usageChart'), {
+            type: 'bar',
+            data: {
+                labels: ['FCC', '311', 'Police', 'CISA', 'FTC', 'EPA', 'State AG', 'Election', 'Feedback'],
+                datasets: [{
+                    label: 'Times Opened',
+                    data: wizardData,
+                    backgroundColor: '#72a4f2',
+                    borderRadius: 8,
+                    borderSkipped: false,
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#334155' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
